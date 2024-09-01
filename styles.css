@@ -1,0 +1,39 @@
+bbody, html {
+margin: 0;
+padding: 0;
+height: 100%;
+width: 100%;
+overflow: hidden;
+display: flex;
+}
+
+.container {
+	display: flex;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+#mainCanvas {
+flex: 1;
+background-color: #f0f0f0;
+}
+
+.sidebar {
+width: 200px;
+background-color: #333;
+color: white;
+display: flex;
+flex-direction: column;
+padding: 10px;
+box-sizing: border-box;
+}
+
+.card {
+background-color: #444;
+margin: 10px 0;
+padding: 10px;
+border-radius: 5px;
+}
