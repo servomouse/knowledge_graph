@@ -1,7 +1,7 @@
 import * as THREE from './js/three.module.js';
 import { OrbitControls } from './js/OrbitControls.js';
 
-const container = document.getElementById('container');
+const container = document.querySelector('.graph_container');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
@@ -78,7 +78,7 @@ controls.dampingFactor = 0.05; // Set the damping factor
 
 let selectedNode = null;
 let isDragging = false;
-let autoRotation = true; // Initialize autoRotation to false
+let autoRotation = true; // Initialize autoRotation to true
 
 function animate() {
 	requestAnimationFrame(animate);
@@ -89,7 +89,6 @@ function animate() {
 
 	renderer.render(scene, camera);
 }
-
 
 animate();
 

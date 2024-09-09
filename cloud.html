@@ -4,17 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Interactive Node Cloud</title>
-<style>
-  	body { margin: 0; }
-  	#container {
-	width: 600px; /* Set the desired width */
-	height: 400px; /* Set the desired height */
-	border: 1px solid black; /* Optional: Add a border for better visibility */
-	}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="container"></div>
+
+	<div class="container">
+	<div class="graph_container"></div>
+	<!-- <canvas id="mainCanvas"></canvas> -->
+	<div class="sidebar">
+	<div class="card">Card 1</div>
+	<div class="card">Card 2</div>
+	<div class="card">Card 3</div>
+	</div>
+	</div>
+
+	<!-- <div id="container"></div> -->
 <script type="module" src="cloud_script.js"></script>
 </body>
 </html>
