@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Node Cloud</title>
-<link rel="stylesheet" href="styles.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Interactive Node Cloud</title>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="js/pell.min.css">
 </head>
 <body>
-
-	<div class="container">
-	<div class="graph_container"></div>
-	<!-- <canvas id="mainCanvas"></canvas> -->
-	<div class="sidebar">
-	<div class="card">Card 1</div>
-	<div class="card">Card 2</div>
-	<div class="card">Card 3</div>
+  	<div class="container">
+		<!-- <div class="graph_container"></div> -->
+		<canvas id="mainCanvas"></canvas>
+		<div class="sidebar">
+			<div class="cards_container">
+				<div class="top_bar">
+					<div class="search-container">
+						<input type="text" placeholder="Search.." name="search">
+					    <button type="submit"><i class="fa fa-search"></i></button>
+				  	</div>
+				</div>
+				<div id="webpage-viewer">Test</div>
+				<div id="editor-container"></div>
+				<div class="card">Card 1</div>
+				<div class="card">Card 2</div>
+				<div class="card">Card 3</div>
+			</div>
+			<div class="button_div">
+				<button class="custom_button">New note</button>
+				<button class="custom_button">File</button>
+			</div>
+		</div>
 	</div>
-	</div>
 
-	<!-- <div id="container"></div> -->
-<script type="module" src="cloud_script.js"></script>
+<!-- <script type="module" src="cloud_script.js"></script> -->
+<script src="js/pell.min.js"></script>
+<script src="text_editor_script.js"></script>
+<script src="graph_script.js"></script>
 </body>
 </html>

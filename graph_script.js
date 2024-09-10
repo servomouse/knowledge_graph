@@ -17,8 +17,8 @@ const graph = {
 // Node positions
 const nodes = {
 	"1234": { x: 150, y: 150 },
-	"2345": { x: 400, y: 300 },
-	"3456": { x: 400, y: 150 }
+	"2345": { x: 300, y: 300 },
+	"3456": { x: 300, y: 150 }
 };
 
 // Function to draw the graph
