@@ -3,38 +3,60 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Interactive Node Cloud</title>
+	<title>Note taking tool</title>
 	<link rel="stylesheet" href="styles.css">
 	<link rel="stylesheet" href="js/pell.min.css">
 </head>
 <body>
-  	<div class="container">
-		<!-- <div class="graph_container"></div> -->
+  	<!-- <div class="container"> -->
 		<canvas id="mainCanvas"></canvas>
 		<div class="sidebar">
+			<div class="top_bar">
+				<div class="search-container">
+					<input type="text" id="searchBar" placeholder="Search..." name="search">
+					<div id="suggestions"></div>
+				  </div>
+				<button class="search-button">Search</button>
+			</div>
 			<div class="cards_container">
-				<div class="top_bar">
-					<div class="search-container">
-						<input type="text" placeholder="Search.." name="search">
-					    <button type="submit"><i class="fa fa-search"></i></button>
-				  	</div>
+				<!-- <div id="webpage-viewer">Test</div> -->
+				<!-- <div id="editor-container"></div> -->
+				<div class="pell-container pell-hidden">
+					<div class="pell-input-field">
+						<input type="text" id="pell-title" placeholder="Title">
+					</div>
+					<div class="pell-editor" id="pell-editor-id"></div>
+					<div class="pell-tags-create">
+						<input type="text" id="pell-tags" placeholder="Tags">
+						<button id="create" onclick="createNewNoteFunc()">Create</button>
+					</div>
 				</div>
-				<div id="webpage-viewer">Test</div>
-				<div id="editor-container"></div>
 				<div class="card">Card 1</div>
 				<div class="card">Card 2</div>
 				<div class="card">Card 3</div>
 			</div>
 			<div class="button_div">
-				<button class="custom_button">New note</button>
-				<button class="custom_button">File</button>
+				<button class="custom_button new-note-button" onclick="addNewNoteFunc()">New note</button>
+				<!-- <button class="custom_button file-button">File</button> -->
+				<div class="dropup">
+					<button class="custom_button">File</button>
+					<div class="dropup-content">
+						<button onclick="uploadEncryptedFile()">Upload Encrypted File</button>
+						<button onclick="uploadNonEncryptedFile()">Upload Non-Encrypted File</button>
+						<button onclick="saveFile()">Save File Encrypted</button>
+						<button onclick="saveFileUnencrypted()">Save File Unencrypted</button>
+						<button onclick="uploadEncryptedFileFromURL()">Upload Encrypted File from URL</button>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	<!-- </div> -->
 
 <!-- <script type="module" src="cloud_script.js"></script> -->
 <script src="js/pell.min.js"></script>
 <script src="text_editor_script.js"></script>
 <script src="graph_script.js"></script>
+<!-- <script src="windows_script.js"></script> -->
+<script src="search_script.js"></script>
 </body>
 </html>

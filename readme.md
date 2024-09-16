@@ -1,0 +1,1 @@
+Start an http server using python (python3 -m http.server) and open 127.0.0.1:8000 in web browser
