@@ -1,32 +1,17 @@
-// Hardcoded graph structure
-const graph = {
-	"1234": {
-		"text": "Hello world!",
-		"id": 1234567,
-		"html": "<!DOCTYPE html><html><head></head><body><h1>The @font-face Rule</h1><div>With CSS, websites can use fonts other than the pre-selected 'web-safe' fonts.</div></body></html>",
-		"title": "Hello world!",
-		"tags": ["one", "two", "three"],
-		"coords": { x: 150, y: 150 }
-	},
-	"2345": {
-		"text": "I am a graph!",
-		"id": 2345678,
-		"html": "<!DOCTYPE html><html><head></head><body><h1>The @font-face Rule</h1><div>With CSS, websites can use fonts other than the pre-selected 'web-safe' fonts.</div></body></html>",
-		"title": "Tururum!",
-		"tags": ["one", "three"],
-		"coords": { x: 300, y: 300 }
-	},
-	"3456": {
-		"text": "I am a graph!",
-		"id": 3456789,
-		"html": "<!DOCTYPE html><html><head></head><body><h1>The @font-face Rule</h1><div>With CSS, websites can use fonts other than the pre-selected 'web-safe' fonts.</div></body></html>",
-		"title": "I am a graph!",
-		"tags": ["three", "two"],
-		"coords": { x: 300, y: 150 }
-	}
-};
+let graph = null;
 
-function drawGraph(ctx, canvas) {
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+
+function set_graph(jsonData) {
+	graph = jsonData;
+}
+
+function addElementToGraph(node, name) {
+	graph[name] = node;
+}
+
+function drawGraph() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	// Draw links
@@ -102,7 +87,7 @@ function mouseMoveEvent(e, ctx, canvas) {
 		graph[draggingNode].coords.x = mouseX - offsetX;
 		graph[draggingNode].coords.y = mouseY - offsetY;
 
-		drawGraph(ctx, canvas);
+		drawGraph();
 		if (!wasdraggingNode) {
 			wasdraggingNode = true;
 		}
@@ -153,8 +138,6 @@ function mouseClickEvent(e, ctx, canvas) {
 }
 
 window.onload = function() {
-	const canvas = document.getElementById('mainCanvas');
-	const ctx = canvas.getContext('2d');
 
 	canvas.width = canvas.clientWidth;	// Set canvas size to match its CSS size
 	canvas.height = canvas.clientHeight;
@@ -164,7 +147,8 @@ window.onload = function() {
 	canvas.addEventListener('mouseup', (e) => {mouseUpEvent(e, ctx, canvas)});
 	canvas.addEventListener('click', (e) => {mouseClickEvent(e, ctx, canvas)});
 
-	drawGraph(ctx, canvas);	// Initial draw
+	// set_graph(null);
+	drawGraph();	// Initial draw
 };
 
 function tagClickHandler(tagName) {
