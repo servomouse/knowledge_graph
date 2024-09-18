@@ -1,4 +1,4 @@
-const suggestions = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape"];
+const searchSuggestions = [];
 const searchBar = document.getElementById('searchBar');
 const suggestionsBox = document.getElementById('suggestions');
 
@@ -6,7 +6,7 @@ searchBar.addEventListener('input', (event) => {
 	const query = event.target.value.toLowerCase();
 	suggestionsBox.innerHTML = '';
 	if (query) {
-		const filteredSuggestions = suggestions.filter(item => item.toLowerCase().includes(query));
+		const filteredSuggestions = searchSuggestions.filter(item => item.toLowerCase().includes(query));
 		filteredSuggestions.forEach(item => {
 			const div = document.createElement('div');
 			div.classList.add('suggestion');

@@ -30,14 +30,22 @@ function uploadNonEncryptedFile() {
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.onload = (e) => {
-            try {
+            // try {
                 jsonFileContent = JSON.parse(e.target.result);
                 console.log('Uploaded JSON:', jsonFileContent);
                 set_graph(jsonFileContent);
+                for (const nodeId in graph) {
+                    const node = graph[nodeId];
+                    node.tags.forEach(nodeTag => {
+                        if(!searchSuggestions.includes(nodeTag)) {
+                            searchSuggestions.push(nodeTag);
+                        }
+                    });
+                }
                 drawGraph();
-            } catch (error) {
-                alert('Invalid JSON file.');
-            }
+            // } catch (error) {
+            //     alert('Invalid JSON file.');
+            // }
         };
         reader.readAsText(file);
     };
