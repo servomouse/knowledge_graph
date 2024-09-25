@@ -1,4 +1,5 @@
 let graph = null;
+let selectedNodes = [];
 
 const canvas = document.getElementById('mainCanvas');
 const ctx = canvas.getContext('2d');
@@ -44,16 +45,23 @@ function drawGraph() {
 		const node = graph[nodeId];
 		ctx.beginPath();
 		ctx.arc(node.coords.x, node.coords.y, 20, 0, 2 * Math.PI);
-		ctx.fillStyle = 'blue';
+		if(selectedNodes.includes(nodeId)) {
+			ctx.fillStyle = 'yellow';
+		} else {
+			ctx.fillStyle = 'blue';
+		}
 		ctx.fill();
 		ctx.stroke();
 	}
+	textIsDrawn = false;
 }
 
 let draggingNode = null;
 let wasdraggingNode = false;
 let offsetX, offsetY;
 let hoverTimeout;
+let isMouseDown = false;
+let textIsDrawn = false;
 
 // Function to check if a point is inside a node
 function isInsideNode(x, y, node) {
@@ -63,6 +71,7 @@ function isInsideNode(x, y, node) {
 }
 
 function mouseDownEvent(e, ctx, canvas) {
+	isMouseDown = true;
 	console.log("Mouse down event detected!");
 	const rect = canvas.getBoundingClientRect();
 	const mouseX = e.clientX - rect.left;
@@ -87,6 +96,8 @@ function mouseMoveEvent(e, ctx, canvas) {
 		graph[draggingNode].coords.x = mouseX - offsetX;
 		graph[draggingNode].coords.y = mouseY - offsetY;
 
+		clearTimeout(hoverTimeout);
+
 		drawGraph();
 		if (!wasdraggingNode) {
 			wasdraggingNode = true;
@@ -100,6 +111,9 @@ function mouseMoveEvent(e, ctx, canvas) {
 	const mouseX = e.clientX - rect.left;
 	const mouseY = e.clientY - rect.top;
 
+	if(isMouseDown) {
+		return;
+	}
 	let hoveredNode = null;
 	for (const nodeId in graph) {
 		if (isInsideNode(mouseX, mouseY, graph[nodeId].coords)) {
@@ -110,13 +124,30 @@ function mouseMoveEvent(e, ctx, canvas) {
 
 	if (hoveredNode) {
 		clearTimeout(hoverTimeout);
-		hoverTimeout = setTimeout(() => {console.log('Node hovered:', hoveredNode);}, 300);
+		hoverTimeout = setTimeout(() => {console.log('Node hovered:', hoveredNode); drawTooltip(graph[hoveredNode].title, graph[hoveredNode].coords.x, graph[hoveredNode].coords.y)}, 300);
 	} else {
+		if(textIsDrawn) {
+			drawGraph();	// Remove text
+		}
 		clearTimeout(hoverTimeout);
 	}
 }
 
+function drawTooltip(text, x, y) {
+	drawGraph();
+	ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';	// Semitransparent black
+	const padding = 5;
+	const textWidth = ctx.measureText(text).width;
+	const textHeight = 16;
+	ctx.fillRect(x+10, y-10-padding, textWidth+(2*padding), textHeight+(2*padding));
+	ctx.fillStyle = 'white';
+	ctx.font = '14px Arial';
+	ctx.fillText(text, x+10+padding, y-10-padding+textHeight+2);
+	textIsDrawn = true;
+}
+
 function mouseUpEvent(e, ctx, canvas) {
+	isMouseDown = false;
 	console.log("Mouse up detected");
 	draggingNode = null;
 }

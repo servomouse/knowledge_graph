@@ -9,19 +9,19 @@
 </head>
 <body>
   	<!-- <div class="container"> -->
-		<canvas id="mainCanvas"></canvas>
+		<canvas id="mainCanvas" title="Switch to dark mode"></canvas>
 		<div class="sidebar">
 			<div class="top_bar">
 				<div class="search-container">
 					<input type="text" id="searchBar" placeholder="Search..." name="search">
 					<div id="suggestions"></div>
 				  </div>
-				<button class="search-button">Search</button>
+				<button class="search-button" onclick="doSearch()">Search</button>
 			</div>
 			<div class="cards_container">
 				<!-- <div id="webpage-viewer">Test</div> -->
 				<!-- <div id="editor-container"></div> -->
-				<div class="pell-container pell-hidden">
+				<!-- <div class="pell-container pell-hidden">
 					<div class="pell-input-field">
 						<input type="text" id="pell-title" placeholder="Title">
 					</div>
@@ -30,10 +30,10 @@
 						<input type="text" id="pell-tags" placeholder="Tags">
 						<button id="create" onclick="createNewNoteFunc()">Create</button>
 					</div>
-				</div>
-				<div class="card">Card 1</div>
+				</div> -->
+				<!-- <div class="card">Card 1</div>
 				<div class="card">Card 2</div>
-				<div class="card">Card 3</div>
+				<div class="card">Card 3</div> -->
 			</div>
 			<div class="button_div">
 				<button class="custom_button new-note-button" onclick="addNewNoteFunc()">New note</button>
