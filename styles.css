@@ -6,16 +6,28 @@ body, html {
 	/* overflow: hidden; */
 	display: flex;
 	background-color: #222;
+
+	overflow: hidden;
+	justify-content: center;
+	/* align-items: center; */
 }
 
-.container {
-	margin: auto;
-	display: flex;
-	/* position: fixed; */
-	/* top: 5px; */
-	/* left: 5px; */
-	/* bottom: 5px; */
-	/* right: 5px; */
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.5s, visibility 0.5s;
+	z-index: 999;
+}
+
+.overlay.visible {
+	visibility: visible;
+	opacity: 1;
 }
 
 .top_bar { 
@@ -241,16 +253,30 @@ body, html {
 
 /* Pell container */
 .pell-container {
-	display: flex;
+	/* display: flex;
 	flex-direction: column;
 	max-width: 600px;
 	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-bottom: 20px; */
+	/* right: 50%; */
+	display: none;
+	margin: auto;
+	margin-top: 50px;
+	position: absolute;
+	/* width: 400px; */
+	padding: 20px;
+	background-color: #333;
+	/* border: 1px solid #ccc; */
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* text-align: center; */
+	z-index: 1000;
 }
 
 .pell-editor {
-	background-color: white;
-	color: black;
+	background-color: #333;
+	color: #ccc;
+	border: 1px solid #ccc;
 	height: 350px;
 	width: 350px;
 	overflow-y: auto;	/* Add vertical scrolling when needed */
@@ -258,7 +284,15 @@ body, html {
 }
 
 .pell-input-field{
+	display: flex;
 	padding-bottom: 10px;
+	box-sizing: border-box;
+	width: 300px;
+	align-items: center;
+}
+
+.pell-input-field inpput{
+	size: 30;
 }
 
 /* .pell-input-field #pell-title{
@@ -268,6 +302,10 @@ body, html {
 /* .pell-input-field input{
 	padding-right: 20px;
 } */
+
+.pell-create-button {
+	float: right;
+}
 
 .pell-tags-create {
 	padding-top: 10px;
@@ -287,4 +325,23 @@ body, html {
 
 .pell-hidden {
 	display: none;
+}
+
+.close-thik {
+	color: #777;
+	font: 14px/100% arial, sans-serif;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	text-decoration: none;
+	/* text-shadow: 0 1px 0 #fff; */
+	cursor: pointer;
+  }
+
+.close-thik:after {
+	content: '✖'; /* UTF-8 symbol */
+}
+
+close-thik:hover {
+	background-color: #ff1c1c;
 }

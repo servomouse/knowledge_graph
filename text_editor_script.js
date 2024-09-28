@@ -63,16 +63,21 @@ function createNewNoteFunc() {
 	console.log(`${pellTitle}`)
 	console.log(`${pellText}`)
 	console.log(`${pellTags}`)
-	if (!pellContainer.classList.contains('pell-hidden')) {
-		pellContainer.classList.add('pell-hidden');
-	}
+	document.getElementById('pell-container').style.display = 'none';
+	document.getElementById('overlay').classList.remove('visible');
+	// if (!pellContainer.classList.contains('pell-hidden')) {
+	// 	pellContainer.classList.add('pell-hidden');
+	// }
 	console.log("New note created!");
 }
 
 function addNewNoteFunc() {
 	const pellContainer = document.querySelector(".pell-container");
-	if (pellContainer.classList.contains('pell-hidden')) {
-		pellContainer.classList.remove('pell-hidden');
-	}
+	
+	document.getElementById('pell-container').style.display = 'block'; // or 'flex' if you prefer
+	document.getElementById('overlay').classList.add('visible');
+	// if (pellContainer.classList.contains('pell-hidden')) {
+	// 	pellContainer.classList.remove('pell-hidden');
+	// }
 	console.log("New note added!");
 }

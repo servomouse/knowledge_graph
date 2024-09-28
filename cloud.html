@@ -10,6 +10,20 @@
 <body>
   	<!-- <div class="container"> -->
 		<canvas id="mainCanvas" title="Switch to dark mode"></canvas>
+		<div class="overlay" id="overlay"></div>
+		
+		<div class="pell-container" id="pell-container">
+			<div class="pell-input-field">
+				<input type="text" id="pell-title" placeholder="Title">
+				<a class="close-thik" onclick="closeDiv()"></a>
+			</div>
+			<div class="pell-editor" id="pell-editor-id"></div>
+			<div class="pell-tags-create">
+				<input type="text" id="pell-tags" placeholder="Tags">
+				<button class="pell-create-button" onclick="createNewNoteFunc()">Create</button>
+			</div>
+		</div>
+
 		<div class="sidebar">
 			<div class="top_bar">
 				<div class="search-container">
@@ -21,16 +35,6 @@
 			<div class="cards_container">
 				<!-- <div id="webpage-viewer">Test</div> -->
 				<!-- <div id="editor-container"></div> -->
-				<!-- <div class="pell-container pell-hidden">
-					<div class="pell-input-field">
-						<input type="text" id="pell-title" placeholder="Title">
-					</div>
-					<div class="pell-editor" id="pell-editor-id"></div>
-					<div class="pell-tags-create">
-						<input type="text" id="pell-tags" placeholder="Tags">
-						<button id="create" onclick="createNewNoteFunc()">Create</button>
-					</div>
-				</div> -->
 				<!-- <div class="card">Card 1</div>
 				<div class="card">Card 2</div>
 				<div class="card">Card 3</div> -->
