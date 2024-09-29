@@ -1,3 +1,5 @@
+let editedNode = null;
+
 const editor = pell.init({
 	element: document.getElementById('pell-editor-id'),
 	onChange: () => {},
@@ -57,13 +59,22 @@ function createNewNoteFunc() {
 	const pellText = document.querySelector(".pell-content").innerHTML;
 	const pellTags = document.querySelector("#pell-tags").value.split(', ');
 	const timestamp = Math.floor(Date.now()/1000);
-	addElementToGraph({
-		'id': timestamp,
-		'html': `<!DOCTYPE html><html><head></head><body>${pellText}</body></html>`,
-		'title': pellTitle,
-		'tags': pellTags.map(element => element.trim()),
-		'coords': {'x': Math.floor(Math.random() * 100) + 10, 'y': Math.floor(Math.random() * 100) + 10}
-	}, `${timestamp}`);
+	if(editedNode) {
+		graph[editedNode].html = pellText;
+		graph[editedNode].title = pellTitle;
+		graph[editedNode].tags = pellTags;
+		graph[editedNode].last_open = timestamp;
+		editedNode = null;
+	} else {
+		addElementToGraph({
+			'id': timestamp,
+			'last_open': timestamp,
+			'html': pellText,
+			'title': pellTitle,
+			'tags': pellTags.map(element => element.trim()),
+			'coords': {'x': Math.floor(Math.random() * 100) + 10, 'y': Math.floor(Math.random() * 100) + 10}
+		}, `${timestamp}`);
+	}
 	drawGraph();
 	console.log(`${pellTitle}`)
 	console.log(`${pellText}`)
@@ -77,7 +88,24 @@ function createNewNoteFunc() {
 }
 
 function addNewNoteFunc() {
-	const pellContainer = document.querySelector(".pell-container");
+	// const pellContainer = document.querySelector(".pell-container");
+	editedNode = null;
+	
+	document.getElementById('pell-container').style.display = 'block'; // or 'flex' if you prefer
+	document.getElementById('overlay').classList.add('visible');
+	// if (pellContainer.classList.contains('pell-hidden')) {
+	// 	pellContainer.classList.remove('pell-hidden');
+	// }
+	console.log("New note added!");
+}
+
+function editNoteFunc(nodeId) {
+	// const pellContainer = document.querySelector(".pell-container");
+	const node = graph[nodeId];
+	editedNode = nodeId;
+	document.querySelector("#pell-title").value = node.title;
+	document.querySelector(".pell-content").innerHTML = node.html;
+	document.querySelector("#pell-tags").value = node.tags.join(", ");
 	
 	document.getElementById('pell-container').style.display = 'block'; // or 'flex' if you prefer
 	document.getElementById('overlay').classList.add('visible');

@@ -1,5 +1,7 @@
 let graph = null;
 let selectedNodes = [];
+let highlightedNode = null;
+let dynamicViewers = [];
 
 const canvas = document.getElementById('mainCanvas');
 const ctx = canvas.getContext('2d');
@@ -45,7 +47,9 @@ function drawGraph() {
 		const node = graph[nodeId];
 		ctx.beginPath();
 		ctx.arc(node.coords.x, node.coords.y, 20, 0, 2 * Math.PI);
-		if(selectedNodes.includes(nodeId)) {
+		if(highlightedNode == nodeId) {
+			ctx.fillStyle = 'red';
+		}else if(selectedNodes.includes(nodeId)) {
 			ctx.fillStyle = 'yellow';
 		} else {
 			ctx.fillStyle = 'blue';
@@ -160,9 +164,7 @@ function mouseClickEvent(e, ctx, canvas) {
 	for (const nodeId in graph) {
 		if (isInsideNode(mouseX, mouseY, graph[nodeId].coords) && !wasdraggingNode) {
 			console.log('Node clicked:', nodeId);
-			if (!document.getElementById(graph[nodeId].id)) {
-				createDraggableNote(graph[nodeId]);
-			}
+			createDraggableNote(graph[nodeId]);
 			break;
 		}
 	}
@@ -185,11 +187,25 @@ window.onload = function() {
 function tagClickHandler(tagName) {
 	console.log(`${tagName} clicked`);
 	const searchBar = document.getElementById('searchBar');
-	searchBar.value += `${tagName} `;
+	searchBar.value += `${tagName}, `;
 	searchBar.focus();
 }
 
+function moveNodeUp(nodeId) {
+	dynamicViewers.forEach((elementId) => {
+		const temp = document.getElementById(elementId);
+		temp.style.zIndex = 1;
+	});
+	const currNode = document.getElementById(nodeId);
+	currNode.style.zIndex = 1000;
+}
+
 function createDraggableNote(node) {
+	if (document.getElementById(node.id)) {
+		moveNodeUp(node.id);
+		return;
+	}
+	dynamicViewers.push(node.id);
 	const mainContainer = document.createElement('div');
 	mainContainer.classList.add('dynamic-container');
 	mainContainer.style.left = `${node.coords.x}px`;
@@ -199,24 +215,32 @@ function createDraggableNote(node) {
 	const titleBar = document.createElement('div');
 	titleBar.classList.add('dynamic-title-bar');
 	titleBar.innerHTML = node.title;
+	titleBar.addEventListener("mousedown", function(){moveNodeUp(node.id);});
 	mainContainer.appendChild(titleBar);
 
 	const editButton = document.createElement('div');
 	editButton.classList.add('dynamimc-edit-button');
 	editButton.title = "Edit";
-	editButton.innerHTML = "&#xe065;";
+	editButton.innerHTML = "&#9998;";
+	editButton.addEventListener('click', function() {
+		editNoteFunc(node.id);
+		mainContainer.remove();
+	});
 	mainContainer.appendChild(editButton);
 
 	const closeButton = document.createElement('div');
 	closeButton.classList.add('dynamic-close-button');
 	closeButton.title = "Close";
+	closeButton.innerHTML = "&#10006;";
+	// closeButton.innerHTML = "&times;";
 	mainContainer.appendChild(closeButton);
 
 	const contentDiv = document.createElement('div');
 	contentDiv.classList.add('dynamic-content-div');
-	let html_code = node.html;
+	let html_code = `<!DOCTYPE html><html><head></head><body>${node.html}</body></html>`;
 	const styleSection = "<style>.footer {position: absolute;left: 0;bottom: 0;width: 100%;text-align: center;}</style>"
 	html_code = html_code.replace("</head>", `${styleSection}</head>`);
+	// <a href="#">W3Schools</a>
 	const tagsList = node.tags.map(word => `<span class="tag-word">${word}</span>`).join(" ");
 	const footerDiv = `<div class='footer'>${tagsList}</div>`;
 	html_code = html_code.replace("</body>", `${footerDiv}</body>`);
@@ -251,6 +275,10 @@ function createDraggableNote(node) {
 	});
 
 	closeButton.addEventListener('click', function() {
+		const index = dynamicViewers.indexOf(node.id);
+		if (index > -1) {
+			dynamicViewers.splice(index, 1); // 2nd parameter means remove one item only
+		}
 		mainContainer.remove();
 	});
 }
