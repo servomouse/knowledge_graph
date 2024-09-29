@@ -1,0 +1,43 @@
+
+.dynamic-container {
+	width: 200px;
+	height: 300px;
+	position: absolute;
+	border: 1px solid black;
+}
+
+.dynamic-title-bar {
+	width: 160px;
+	height: 20px;
+	background-color: lightblue;
+	cursor: move;
+}
+
+.dynamimc-edit-button {
+	width: 20px;
+	height: 20px;
+	background-color: lightgreen;
+	position: absolute;
+	top: 0;
+	right: 20px;
+	cursor: pointer;
+    /* content: "&#xe065;"; */
+}
+
+.dynamic-close-button {
+	width: 20px;
+	height: 20px;
+	background-color: rgb(102, 52, 238);
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+}
+
+.dynamic-content-div {
+	width: 200px;
+	height: 280px;
+	background-color: lightcoral;
+	position: absolute;
+	bottom: 0;
+}

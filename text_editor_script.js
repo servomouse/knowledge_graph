@@ -46,6 +46,11 @@ function getDocumentContent() {
 	return editor.content.innerHTML;
 }
 
+function pellCancel() {
+	document.getElementById('pell-container').style.display = 'none';
+	document.getElementById('overlay').classList.remove('visible');
+}
+
 function createNewNoteFunc() {
 	const pellContainer = document.querySelector(".pell-container");
 	const pellTitle = document.querySelector("#pell-title").value;

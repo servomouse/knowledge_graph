@@ -204,6 +204,7 @@ function createDraggableNote(node) {
 	const editButton = document.createElement('div');
 	editButton.classList.add('dynamimc-edit-button');
 	editButton.title = "Edit";
+	editButton.innerHTML = "&#xe065;";
 	mainContainer.appendChild(editButton);
 
 	const closeButton = document.createElement('div');
